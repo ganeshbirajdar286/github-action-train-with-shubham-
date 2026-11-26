@@ -17,6 +17,6 @@ jobs:
         run: pip install ruff
 
       - name: check the files for linting
-        run: ruff chech .
+        run: ruff check .
 
       

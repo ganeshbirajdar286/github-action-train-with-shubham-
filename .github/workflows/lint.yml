@@ -1,9 +1,10 @@
+
 name: pythonlinter
 
 on:
   push:
     paths:
-      - "*.py"
+      - "**.py"
 
 jobs:
   code-linter:
@@ -11,12 +12,10 @@ jobs:
 
     steps:
       - name: checkout/clone-code
-        uses: actions/checkout@v7
-      
+        uses: actions/checkout@v4
+
       - name: install linter
         run: pip install ruff
 
       - name: check the files for linting
-        run: ruff check .
-
-      
+        run: ruff check . --fix

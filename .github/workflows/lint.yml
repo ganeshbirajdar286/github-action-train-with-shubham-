@@ -6,7 +6,7 @@ on:
       - "*.py"
 
 jobs:
-  code:
+  code-linter:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,3 +15,8 @@ jobs:
       
       - name: install linter
         run: pip install ruff
+
+      - name: check the files for linting
+        run: ruff chech .
+
+      

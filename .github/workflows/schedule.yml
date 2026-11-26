@@ -1,0 +1,30 @@
+
+
+
+name: go linter
+
+on:
+    schedule:
+     - cron: '45 4 * * *'
+
+jobs:
+  code-formater:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: 
+        go: ['1.22','1.23','1.24']
+    steps:
+      - name: setup GO
+        uses: actions/setup-go@v6
+        with: 
+            go-version: ${{ matrix.go }}
+            go-version-file: 'go.md'
+            cahce-dependency-path: go.sum
+      - name: run go formatter
+        run: go fmt
+        working-directory: backend
+      - name: run go vet
+        run: go vet
+        working-directory: backend
+

@@ -14,3 +14,10 @@ jobs:
            with:
              username: ${{vars.DOCKERHUB_USERNAME }}
              password: ${{secrets.DOCKERHUB_TOKEN }}
+         - name: docker build annd push
+           uses: docker/build-push-action@v7
+           with:
+              push: true
+              tags: ${{vars.DOCKER_USERNAME }}/devboarf:latest
+              
+           

@@ -4,20 +4,57 @@ on:
       -  "app.py"
 
 jobs:
-   code:
+    code:
       runs-on: ubuntu-latest
       steps:
-         - name: checkout code
-           uses: actions/checkout@v7
-         - name: docker setup[login]
-           uses: docker/login-action@v4
-           with:
-             username: ${{vars.DOCKERHUB_USERNAME }}
-             password: ${{secrets.DOCKERHUB_TOKEN }}
-         - name: docker build annd push
-           uses: docker/build-push-action@v7
-           with:
+        - name: checkout code
+          uses: actions/checkout@v7
+        - name: docker setup[login]
+          uses: docker/login-action@v4
+          with:
+            username: ${{vars.DOCKERHUB_USERNAME }}
+            password: ${{secrets.DOCKERHUB_TOKEN }}
+        - name: docker build annd push
+          uses: docker/build-push-action@v7
+          with:
               push: true
               tags: ${{vars.DOCKER_USERNAME }}/devboarf:latest
               
-           
+          
+    frontent-linter:
+      runs-on: ubuntu-latest
+      steps:
+          - name: checkout code 
+            uses: actions/checkout@v7
+          - name: setup node js
+            uses: actions/setup-node@v7
+            with:
+              node-version: '20'
+              cache: npm
+              cache-dependency-path: frontent/package-lock.json
+          - name: install npm package 
+            run: npm ci 
+          - name: frontend-linter
+            run: npm run lint
+          - name: runing test
+            run : npm run test
+
+    backend-linter:
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout the backend
+          uses: actions/checkout@v7
+        - name: setup node js
+          uses: actions/setup-node@v7
+          with:
+              node-version: '20'
+              cache: npm
+              cache-dependency-path: frontent/package-lock.json
+        - name: install npm package 
+          run: npm ci 
+        - name: frontend-linter
+          run: npm run lint
+        - name: runing test
+          run : npm run test
+
+        

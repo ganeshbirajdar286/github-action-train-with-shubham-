@@ -26,5 +26,7 @@ jobs:
     docker-check:
       uses: ./.github/worklflow/docker-scanner.yml
       secrets: inherit
- #sonaeqube
-    push-to-docker-hub:
+  # sonaeqube
+    sonarQube:
+        uses: ./.github/worflow/sonar-scanner.yml
+        push-to-docker-hub:

@@ -25,3 +25,4 @@ jobs:
   # docker check
     docker-check:
       uses: ./.github/worklflow/docker-scanner.yml
+      secrets: inherit

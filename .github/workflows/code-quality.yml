@@ -1,0 +1,41 @@
+# goal - to ensure no secrets have been leaked in the code
+
+name: code quality 
+on: workflow_call  # you can call this worflow before/after any other workflow
+
+jobs:
+    sast:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                langauage: ["node","go"]
+        steps:
+          - name: code checkout
+            uses: actions/checkout@v7
+
+          - name: node js setup
+            uses: actions/setup-${{martix.langauage}}@v6
+            with: 
+                node-version: '20'
+                cache: npm
+                cache-dependency-path: frontend/package-lock.json
+          
+          - name: run linter
+            run: npm run lint
+            working-directory: frontend
+
+
+          - name: setup go
+            uses: actions/setup-${{martix.langauage}}@v6
+            with:
+              go-version: '1.23'
+              go-version-file: '${{martix.langauage}}.mod'
+              cache-dependency-path: ${{martix.langauage}}.sum
+          
+          - name: run go formatter
+            run : ${{martix.langauage}}  fmt
+            working-directory: backend
+
+          - name: run go vet
+            run: ${{martix.langauage}} vet
+            working-directory: backend

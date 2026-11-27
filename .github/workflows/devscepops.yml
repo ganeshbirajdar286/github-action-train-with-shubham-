@@ -1,0 +1,13 @@
+## goal -to run end to end devscopes ci pipeline
+
+name: devsecops
+
+on:
+  push:
+     
+
+jobs:
+
+  # code stage (with shift left)
+    code-qaulity:
+      uses:  ./.github/workflows/code-quality.yml

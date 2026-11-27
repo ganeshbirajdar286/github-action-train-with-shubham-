@@ -17,4 +17,11 @@ jobs:
         run: go install golang.org/x/vuln/cmd/govulncheck@latest
       - name: govulcheck
         run: govulcheck ./backend/..
+      - name: upload report to artifact
+        uses: actions/upload-artifact@v4
+        with: 
+          name:  go-report
+          path:  report /govulcheck-report.txt
+          retention-days: 5
+          
 

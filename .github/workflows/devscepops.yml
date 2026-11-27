@@ -29,4 +29,11 @@ jobs:
   # sonaeqube
     sonarQube:
         uses: ./.github/worflow/sonar-scanner.yml
-        push-to-docker-hub:
+        secrets: inherit
+    
+    # dast
+    dastscann:
+      uses: ./.github/workflow/dast.yml
+      secrets: inherit
+
+  

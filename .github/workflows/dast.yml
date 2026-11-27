@@ -1,1 +1,23 @@
-# goal- to ensure my running application is free from OWSAP top 10 security issues
+name: dast
+
+on:
+  workflow_call:
+
+jobs:
+  dast-scan:
+    name: OWASP ZAP Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout source code
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Step 2: Run OWASP ZAP scan
+      - name: OWASP ZAP Scan
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: 'https://your-running-application.com'
+          token: ${{secret.GITHUB_TOKEN}}
+          fail_action: false
+          allow_issue_writting: false

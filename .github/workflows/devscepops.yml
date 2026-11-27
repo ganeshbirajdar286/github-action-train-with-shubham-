@@ -20,3 +20,8 @@ jobs:
   # dependency-scanning
     dep-scanning:
       uses: ./.github/worflow/dependency-scanner.yml
+
+
+  # docker check
+    docker-check:
+      uses: ./.github/worklflow/docker-scanner.yml

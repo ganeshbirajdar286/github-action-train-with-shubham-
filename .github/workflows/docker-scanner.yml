@@ -1,2 +1,16 @@
 # goal - ensue the docker files and  docker images are security  tested
- 
+name: docker scan
+on: 
+   workflow_call:
+
+jobs:
+    docker-file-lint-and_scann:
+        runs-on: ubuntu-latest
+        steps:
+          - name: code checkout
+            uses: actions/checkout@v7
+          - name: docker linting
+            uses: hadolint/hadolint-action@v3.1.0
+            with:
+              dockerfile: dockerfile
+            

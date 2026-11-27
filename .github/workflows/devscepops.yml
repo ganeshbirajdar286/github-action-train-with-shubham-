@@ -4,10 +4,17 @@ name: devsecops
 
 on:
   push:
-     
+      branches:
+        - master
 
 jobs:
 
   # code stage (with shift left)
     code-qaulity:
       uses:  ./.github/workflows/code-quality.yml
+  
+  # secret scanning use git leak
+    secret-scanning:
+      uses: ./.github/workflows/secret-scanning.yml
+
+      

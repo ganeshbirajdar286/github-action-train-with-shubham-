@@ -1,1 +1,20 @@
 #  goal - to check whether the application code coverage doesn't have security threast
+
+# in this is have to use a sonar application on vps
+name: sonar qude scan
+on:
+ workflow_call:
+
+jobs:
+  sonar-scanner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v7
+
+      - name: sonarQube scan
+        uses: SonarSource/sonarqube-scan-action@v82.0
+        env:
+          SONAR_TOKEN: ${{secret.SONAR_TOKEN}}
+          SONAR_HOST_URL: ${{secret.SONAR_URL}}
+

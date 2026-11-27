@@ -1,0 +1,3 @@
+sonar.organization=devboard
+sonar.projectKey=devboard
+sonar.source=backend,frontend
